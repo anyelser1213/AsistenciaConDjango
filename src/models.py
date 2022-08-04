@@ -35,7 +35,7 @@ def direccion_usuarios(instance, filename):
 
 class UsuarioManager(BaseUserManager):
 
-    def create_user(self,email,username,password=None,admin = False,is_superuser =False,plan_elegido="gratis"):
+    def create_user(self,username,password=None,admin = False,is_superuser =False,plan_elegido="gratis"):
         print("Creamos Usuario Normal")
         #if not email:
         #    raise ValueError('El usuario debe tener un correo electronico')
@@ -59,7 +59,7 @@ class UsuarioManager(BaseUserManager):
     
 
     #Funcion para usuario administrador
-    def create_superuser(self,email,username,password,admin = True,is_superuser = True):
+    def create_superuser(self,username,password,admin = True,is_superuser = True):
         print("Creamos superusuario")
 
         usuario = self.create_user(
@@ -137,7 +137,7 @@ class Usuarios(AbstractBaseUser,PermissionsMixin):
     is_superuser = models.BooleanField(default=False)#Este es superusuario
     admin = models.BooleanField(default=False)#Para poder ingresar al admin de django
     fecha_creacion = models.DateTimeField(auto_now_add=True) 
-    ultimo_ingreso = models.DateTimeField('actualizado', auto_now=False)
+    ultimo_ingreso = models.DateTimeField('actualizado', auto_now=False,blank=True, null=True)
     
     
     #rol = models.CharField("Rol",max_length=150,choices=usuario_tipos,default='usuario',blank=True, null=True)
